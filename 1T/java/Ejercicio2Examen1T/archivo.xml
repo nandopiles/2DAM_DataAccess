@@ -1,0 +1,24 @@
+<com.mycompany.ejercicio2examen1t.Grupo>
+  <alumnos>
+    <com.mycompany.ejercicio2examen1t.Alumno>
+      <nombre>Raul</nombre>
+      <apellidos>Garcia</apellidos>
+      <NIA>1</NIA>
+    </com.mycompany.ejercicio2examen1t.Alumno>
+    <com.mycompany.ejercicio2examen1t.Alumno>
+      <nombre>Maria</nombre>
+      <apellidos>Lopez</apellidos>
+      <NIA>2</NIA>
+    </com.mycompany.ejercicio2examen1t.Alumno>
+    <com.mycompany.ejercicio2examen1t.Alumno>
+      <nombre>Pablo</nombre>
+      <apellidos>Morales</apellidos>
+      <NIA>3</NIA>
+    </com.mycompany.ejercicio2examen1t.Alumno>
+    <com.mycompany.ejercicio2examen1t.Alumno>
+      <nombre>Raul</nombre>
+      <apellidos>Leal</apellidos>
+      <NIA>4</NIA>
+    </com.mycompany.ejercicio2examen1t.Alumno>
+  </alumnos>
+</com.mycompany.ejercicio2examen1t.Grupo>

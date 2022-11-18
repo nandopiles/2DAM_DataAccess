@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Mon Nov 07 10:17:23 CET 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0184-5161-50cc-0000076b7c60 
+on database directory C:\Users\7J\Documents\NetBeansProjects\Ejercicio1Examen1T\db_examen\derby\database with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2cdf8d8a 
+Loaded from file:/C:/Users/7J/.m2/repository/org/apache/derby/derby/10.15.2.0/derby-10.15.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=11.0.16.1+1-LTS-1
+user.dir=C:\Users\7J\Documents\NetBeansProjects\Ejercicio1Examen1T
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
