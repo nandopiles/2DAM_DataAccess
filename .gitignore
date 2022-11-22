@@ -15,3 +15,6 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+/2T/Act4_2/nbproject/private/
+/2T/Act4_2/build/
+/2T/Act4_2/dist/
