@@ -7,6 +7,10 @@ import org.hibernate.SessionFactory;
 import pojos.Departments;
 import exceptions.DepartmentNotFoundException;
 import exceptions.TeacherNotFoundException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.Transaction;
@@ -159,6 +163,61 @@ public class Main {
         } catch (DepartmentNotFoundException ex) {
             System.out.println("\t(-) Department Not Found...\n");
         }
+    }
+
+    public static void createNewTeacher() {
+        int id, salary;
+        String name, surname, email, stringDate = "";
+        Date date;
+        Departments dep = null;
+        boolean repeat = true;
+        DateFormat dateFormat = null;
+
+        System.out.println("\tCREATE TEACHER\n===================================");
+
+        do {
+            System.out.print("Id: ");
+            try {
+                id = fr.nextInt();
+                repeat = false;
+            } catch (InputMismatchException ex) {
+                System.out.println("(-) Input must be a number");
+                fr.nextLine();
+            }
+        } while (repeat);
+        System.out.print("Name: ");
+        name = eb.nextLine();
+        System.out.print("Surname: ");
+        surname = eb.nextLine();
+        do {
+            System.out.print("Email: ");
+            email = eb.nextLine();
+        } while (Email.checkEmail(email));
+
+        //fecha dudas, probar en clase
+        repeat = true;
+        dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        do {
+            System.out.print("Start Date: ");
+            stringDate = eb.nextLine();
+            try {
+                date = dateFormat.parse(stringDate);
+                repeat = false;
+            } catch (ParseException ex) {
+                System.out.println("\t(-) Invalid Date...");
+            }
+        } while (repeat);
+
+        repeat = true;
+        do {
+            System.out.print("Salary: ");
+            try {
+                salary = fr.nextInt();
+                repeat = false;
+            } catch (InputMismatchException ex) {
+                System.out.println("\t(-) Input must be a number...");
+            }
+        } while (repeat);
     }
 
     public static void main(String[] args) {
