@@ -12,12 +12,13 @@ import exceptions.TeacherNotFoundException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.Year;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.hibernate.Transaction;
 import pojos.Teachers;
 
@@ -394,14 +395,20 @@ public class Main {
             listT = dep.getTeacherses();
             for (Teachers teacher : listT) {
                 teacher.setSalary(salary);
-                System.out.printf("\t(+) \"%s %s\"'s(%d) salary changed to %d\n", teacher.getName(), teacher.getSurname(), teacher.getId(), teacher.getSalary());
+                sesion.save(teacher);
+                tx = sesion.beginTransaction();
+                tx.commit();
+                System.out.printf("\t(+) \"%s %s's\"(%d) salary changed to %d\n", teacher.getName(), teacher.getSurname(), teacher.getId(), teacher.getSalary());
             }
         }
     }
 
     public static void riseSalaryOfDeptSeniors(int deptNum) throws DepartmentNotFoundException {
         Departments dep = null;
-        int yearSenior, currrentYear;
+        Calendar cal = Calendar.getInstance();
+        String stringDate = "";
+        int yearSenior = 0, currrentYear, oldSalary = 0, newSalary = 0;
+        float percentage = 0;
         boolean repeat = true;
         Set<Teachers> listT = null;
 
@@ -419,11 +426,30 @@ public class Main {
                     fr.nextLine();
                 }
             } while (repeat);
+            repeat = true;
+            do {
+                System.out.print("Percentage to rise: ");
+                try {
+                    percentage = fr.nextFloat();
+                    repeat = false;
+                } catch (InputMismatchException ex) {
+                    System.out.println("(-) Input must be a number");
+                    fr.nextLine();
+                }
+            } while (repeat);
 
             listT = dep.getTeacherses();
-            currrentYear = Year.now().getValue();
+            currrentYear = cal.get(Calendar.YEAR);
             for (Teachers teacher : listT) {
-                //comprobar la fecha y ver si hay que hacer rise al salario por ser Senior
+                //I dont know how to use Calendar instead of util.Date, that's Deprecated
+                if ((currrentYear - (teacher.getStartDate().getYear() + 1900)) > yearSenior) { //u have to add 1900 to the year, is how it works💩
+                    oldSalary = teacher.getSalary();
+                    teacher.setSalary(Math.round(oldSalary + ((percentage / 100) * oldSalary)));
+                    sesion.save(teacher);
+                    tx = sesion.beginTransaction();
+                    tx.commit();
+                    System.out.printf("\t(+) \"%s %s's\" new salary -> %d (old: %d(+%2.2f%%))\n", teacher.getName(), teacher.getSurname(), teacher.getSalary(), oldSalary, percentage);
+                }
             }
         }
     }
