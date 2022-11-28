@@ -1,3 +1,4 @@
+package app;
 
 import java.util.List;
 import org.hibernate.Query;
@@ -12,14 +13,15 @@ import pojos.Teachers;
  */
 public class Main {
 
+    static SessionFactory sessionf = NewHibernateUtil.getSessionFactory();
+    static Session session = sessionf.openSession();
+
     public static void main(String[] args) {
-        SessionFactory sessionf = NewHibernateUtil.getSessionFactory();
-        Session session = sessionf.openSession();
-        
+
         Query q = session.createQuery("select avg(salary) from Teachers");
         Double salarioMedio = (Double) q.uniqueResult();
         System.out.println("Salario Medio: " + salarioMedio);
-        
+
 //        Query q = session.createQuery("from Departments d, Teachers e"
 //                + " where d.deptNum = e.departments.deptNum order by e.surname");
 //        List<Object[]> lista = q.list();
