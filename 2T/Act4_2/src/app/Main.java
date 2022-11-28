@@ -13,10 +13,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Year;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.Transaction;
@@ -153,9 +151,9 @@ public class Main {
             head = "\tTEACHERS OF DEPT(" + id + ")";
             System.out.println(head);
             separator(head.length());
-            for (Teachers teacher : listT) {
+            listT.forEach(teacher -> {
                 infoTeacher(teacher, head);
-            }
+            });
         }
     }
 
@@ -440,11 +438,12 @@ public class Main {
 
             listT = dep.getTeacherses();
             currrentYear = cal.get(Calendar.YEAR);
+
             for (Teachers teacher : listT) {
                 //I dont know how to use Calendar instead of util.Date, that's Deprecated
-                if ((currrentYear - (teacher.getStartDate().getYear() + 1900)) > yearSenior) { //u have to add 1900 to the year, is how it works💩
+                if ((currrentYear - (teacher.getStartDate().getYear() + 1900)) >= yearSenior) { //u have to add 1900 to the year, is how it works💩
                     oldSalary = teacher.getSalary();
-                    teacher.setSalary(Math.round(oldSalary + ((percentage / 100) * oldSalary)));
+                    teacher.setSalary((Integer) Math.round(oldSalary + ((percentage / 100) * oldSalary)));
                     sesion.save(teacher);
                     tx = sesion.beginTransaction();
                     tx.commit();
