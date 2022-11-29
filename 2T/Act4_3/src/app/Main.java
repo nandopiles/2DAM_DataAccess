@@ -4,22 +4,17 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import pojos.Departments;
+import pojos.Teachers;
 
 /**
  *
- * @author 7J
+ * @author Nando
  */
 public class Main {
 
-    static SessionFactory sesionf = NewHibernateUtil.getSessionFactory();
-    static Session sesion = sesionf.openSession();
     static Scanner eb = new Scanner(System.in);
     static Scanner fr = new Scanner(System.in);
-
-    public static void closeSesions() {
-        sesion.close();
-        sesionf.close();
-    }
 
     public static int menu() {
         int option = 0;
@@ -55,7 +50,60 @@ public class Main {
         return option;
     }
 
-    public static void main(String[] args) {
+    public static void showAllDepartments() {
+        Departments[] listDep = null;
 
+        listDep = QueryDept.getAllDepartments();
+        for (Departments dep : listDep) {
+            QueryDept.showDepartment(dep);
+        }
+    }
+
+    public static void searchDeptByName() {
+        Departments dep = null;
+        String nameDept;
+
+        System.out.print("DeptName: ");
+        nameDept = eb.nextLine();
+        dep = QueryDept.getDepartmentByName(nameDept);
+        if (dep != null) {
+            QueryDept.showDepartment(dep);
+        } else {
+            System.out.printf("(-) Dept \"%s\" not found...\n", nameDept);
+        }
+    }
+
+    public static void main(String[] args) {
+        int option = 0;
+
+        do {
+            option = menu();
+            switch (option) {
+                case 1:
+                    showAllDepartments();
+                    break;
+                case 2:
+                    searchDeptByName();
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 9:
+                    break;
+                case 10:
+                    break;
+            }
+        } while (option != 10);
+        System.out.println("(+) SEE U!");
+        QueryDept.closeSF();
     }
 }
