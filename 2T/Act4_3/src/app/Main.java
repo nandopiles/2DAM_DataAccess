@@ -1,9 +1,8 @@
 package app;
 
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import pojos.Departments;
 import pojos.Teachers;
 
@@ -61,16 +60,37 @@ public class Main {
 
     public static void searchDeptByName() {
         Departments dep = null;
-        String nameDept;
+        String deptName;
 
         System.out.print("DeptName: ");
-        nameDept = eb.nextLine();
-        dep = QueryDept.getDepartmentByName(nameDept);
+        deptName = eb.nextLine();
+        dep = QueryDept.getDepartmentByName(deptName);
         if (dep != null) {
             QueryDept.showDepartment(dep);
         } else {
-            System.out.printf("(-) Dept \"%s\" not found...\n", nameDept);
+            System.out.printf("\t(-) Dept \"%s\" not found...\n\n", deptName.toUpperCase());
         }
+    }
+
+    //podríamos utilizar el método searchDeptByName() para buscar el dept y luego pasarle al método de QueryDept un objeto Departments
+    public static void getAverageSalaryByDeptName() {
+        String deptName;
+        double averageSalary = -0;
+
+        System.out.print("DeptName: ");
+        deptName = eb.nextLine();
+        averageSalary = QueryDept.getAverageSalaryofDepartment(deptName);
+        if (averageSalary != -0) {
+            System.out.printf("(+) Average Salary of Dept \"%s\": %2.2f€\n\n", deptName.toUpperCase(), averageSalary);
+        } else {
+            System.out.printf("\t(-) Dept \"%s\" not found...\n\n", deptName.toUpperCase());
+        }
+    }
+
+    public static void getAverageSalaryOfEachDept() {
+        HashMap<String, Double> salaryHash = QueryDept.getAverageSalaryPerDept();
+        
+        salaryHash.values().toArray(); //return an array of values
     }
 
     public static void main(String[] args) {
@@ -86,8 +106,10 @@ public class Main {
                     searchDeptByName();
                     break;
                 case 3:
+                    getAverageSalaryByDeptName();
                     break;
                 case 4:
+                    getAverageSalaryOfEachDept();
                     break;
                 case 5:
                     break;

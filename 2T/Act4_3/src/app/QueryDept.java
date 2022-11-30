@@ -40,23 +40,44 @@ public class QueryDept {
         Session sesion = sesionf.openSession();
         Departments dep = null;
 
-        Query q = sesion.createQuery("FROM Departments d WHERE d.name='" + patternName + "'");
-        dep = (Departments) q.uniqueResult();
+        Query q = sesion.createQuery("FROM Departments d WHERE d.name=:deptName");
+        q.setString("deptName", patternName);
+        try {
+            dep = (Departments) q.uniqueResult();
+        } catch (org.hibernate.NonUniqueResultException e) {
+            System.out.println("\t(-) More than 1 Result returned... Taking the 1st one");
+            dep = (Departments) q.setMaxResults(1).uniqueResult();
+        }
         sesion.close();
 
         return dep;
     }
 
-    public static double getAverageSalaryofDepartment(String depName) {
-        double a = 0;
+    public static double getAverageSalaryofDepartment(String deptName) {
+        Session sesion = sesionf.openSession();
+        double averageSalary;
 
-        return a;
+        Query q = sesion.createQuery("SELECT avg(t.salary) "
+                + "FROM Teachers t "
+                + "WHERE departments.name=:deptName");
+        q.setString("deptName", deptName);
+        averageSalary = (double) q.uniqueResult();
+        sesion.close();
+
+        return averageSalary;
     }
 
     public static HashMap<String, Double> getAverageSalaryPerDept() {
-        HashMap<String, Double> a = null;
+        Session sesion = sesionf.openSession();
+        HashMap<String, Double> list = null;
 
-        return a;
+        Query q = sesion.createQuery("SELECT departments.name, avg(salary) "
+                + "FROM Teachers");
+        list = (HashMap<String, Double>) q.list();
+
+        sesion.close();
+
+        return list;
     }
 
     public static void closeSF() {

@@ -65,6 +65,6 @@ public class Departments implements java.io.Serializable {
         return "\tDepartment(" + this.deptNum + ")\n=============================\n"
                 + "Name: " + this.name + "\n"
                 + "Office: " + this.office + "\n"
-                + "Teachers: " + this.teacherses.size() + "\n";
+                + "Teachers: " + this.teacherses.size() + "\n=============================\n\n";
     }
 }
