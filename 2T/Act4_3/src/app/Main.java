@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import pojos.Departments;
 import pojos.Teachers;
+import utils.Separator;
 
 /**
  *
@@ -49,6 +50,11 @@ public class Main {
         return option;
     }
 
+    public static void closeSessionsFactorys() {
+        QueryDept.closeSF();
+        QueryTeach.closeSF();
+    }
+
     public static void showAllDepartments() {
         Departments[] listDep = null;
 
@@ -89,8 +95,28 @@ public class Main {
 
     public static void getAverageSalaryOfEachDept() {
         HashMap<String, Double> salaryHash = QueryDept.getAverageSalaryPerDept();
-        
-        salaryHash.values().toArray(); //return an array of values
+        String header;
+
+        for (String nameDept : salaryHash.keySet()) {
+            double salary = salaryHash.get(nameDept);
+            header = "\tAverage Salary of " + nameDept + "\n";
+            System.out.printf(header);
+            Separator.separator(header.length());
+            System.out.printf("Avg Salary: %2.2f€\n\n", salary);
+        }
+    }
+
+    public static void showAllTeachers() {
+        Teachers[] listTeach = QueryTeach.getAllTeachers();
+
+        for (Teachers teacher : listTeach) {
+            QueryTeach.showTeacher(teacher);
+        }
+    }
+
+    public static void getMostVeteranTeacher() {
+        Teachers veteranTeacher = QueryTeach.getMostVeteranTeacher();
+        QueryTeach.showTeacher(veteranTeacher);
     }
 
     public static void main(String[] args) {
@@ -112,10 +138,13 @@ public class Main {
                     getAverageSalaryOfEachDept();
                     break;
                 case 5:
+                    showAllTeachers();
                     break;
                 case 6:
+                    getMostVeteranTeacher();
                     break;
                 case 7:
+                    
                     break;
                 case 8:
                     break;
@@ -126,6 +155,6 @@ public class Main {
             }
         } while (option != 10);
         System.out.println("(+) SEE U!");
-        QueryDept.closeSF();
+        closeSessionsFactorys();
     }
 }
