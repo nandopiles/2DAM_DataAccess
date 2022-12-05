@@ -4,6 +4,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import pojos.Teachers;
 
 /**
@@ -50,21 +51,39 @@ public class QueryTeach {
     }
 
     public static int setSalary(int newSalary) {
-        int salary = 0;
+        Session sesion = sesionf.openSession();
+        int affectedRows;
+        Transaction tx = sesion.beginTransaction();
 
-        return salary;
+        Query q = sesion.createQuery("UPDATE Teachers t SET t.salary = :newSalary");
+        q.setInteger("newSalary", newSalary);
+        affectedRows = q.executeUpdate();
+        tx.commit();
+        sesion.close();
+
+        return affectedRows;
     }
 
     public static int riseSalaryOfSeniers(int numOfYearsToBeSenior, int prctRise) {
-        int rise = 0;
+        int affectedRows = 0;
+        Session sesion = sesionf.openSession();
+        Transaction tx = sesion.beginTransaction();
 
-        return rise;
+        Query q = sesion.createQuery("UPDATE Teachers t SET t.salary = t.salary + ((:prct / 100) * t.salary) "
+                + "WHERE year(current_date()) - year(t.startDate) > :yearsSenior)");
+        q.setInteger("yearsSenior", numOfYearsToBeSenior);
+        q.setInteger("prct", prctRise);
+        affectedRows = q.executeUpdate();
+        tx.commit();
+        sesion.close();
+
+        return affectedRows;
     }
 
     public static int deleteTeachersOfDepartment(String depName) {
-        int a = 0;
+        int affectedRows = 0;
 
-        return a;
+        return affectedRows;
     }
 
     public static void closeSF() {

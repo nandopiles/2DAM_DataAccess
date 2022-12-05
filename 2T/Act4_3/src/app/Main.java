@@ -119,6 +119,54 @@ public class Main {
         QueryTeach.showTeacher(veteranTeacher);
     }
 
+    public static void setNewSalaryToEveryone() {
+        int newSalary = 0, affectedRows;
+        boolean repeat = true;
+
+        do {
+            System.out.print("New Salary: ");
+            try {
+                newSalary = fr.nextInt();
+                repeat = false;
+            } catch (InputMismatchException e) {
+                System.out.println("\t(-) Input must be a number");
+                fr.nextLine();
+            }
+        } while (repeat);
+        affectedRows = QueryTeach.setSalary(newSalary);
+        System.out.printf("\t(+) %d Affected Rows\n\n", affectedRows);
+    }
+
+    public static void riseSeniorsSalary() {
+        int affectedRows, prct = 0, yearsSenior = 0;
+        boolean repeat = true;
+
+        do {
+            System.out.print("Years to be Senior: ");
+            try {
+                yearsSenior = fr.nextInt();
+                repeat = false;
+            } catch (InputMismatchException e) {
+                System.out.println("\t(-) Input must be a number");
+                fr.nextLine();
+            }
+        } while (repeat);
+        repeat = true;
+        do {
+            System.out.print("Prct to Rise: ");
+            try {
+                prct = fr.nextInt();
+                repeat = false;
+            } catch (InputMismatchException e) {
+                System.out.println("\t(-) Input must be a number");
+                fr.nextLine();
+            }
+        } while (repeat);
+
+        affectedRows = QueryTeach.riseSalaryOfSeniers(yearsSenior, prct);
+        System.out.printf("\t(+) %d Affected Rows\n\n", affectedRows);
+    }
+
     public static void main(String[] args) {
         int option = 0;
 
@@ -144,9 +192,10 @@ public class Main {
                     getMostVeteranTeacher();
                     break;
                 case 7:
-                    
+                    setNewSalaryToEveryone();
                     break;
                 case 8:
+                    riseSeniorsSalary();
                     break;
                 case 9:
                     break;
