@@ -1,5 +1,6 @@
 package app;
 
+import utils.NewHibernateUtil;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -44,7 +45,12 @@ public class QueryTeach {
 
         Query q = sesion.createQuery("FROM Teachers t "
                 + "WHERE t.startDate=(SELECT min(tc.startDate) FROM Teachers tc)");
-        teach = (Teachers) q.uniqueResult();
+        try {
+            teach = (Teachers) q.uniqueResult();
+        } catch (org.hibernate.NonUniqueResultException e) {
+            System.out.println("\t(-) More than 1 Result returned. Taking the first one...\n");
+            teach = (Teachers) q.setMaxResults(1).uniqueResult();
+        }
         sesion.close();
 
         return teach;
@@ -82,6 +88,17 @@ public class QueryTeach {
 
     public static int deleteTeachersOfDepartment(String depName) {
         int affectedRows = 0;
+        Session sesion = sesionf.openSession();
+        Transaction tx = sesion.beginTransaction();
+
+        Query q = sesion.createQuery("DELETE Teachers t "
+                + "WHERE t.departments.deptNum IN "
+                + "(SELECT d.deptNum FROM Departments d "
+                + "WHERE d.name = :depName)");
+        q.setString("depName", depName);
+        affectedRows = q.executeUpdate();
+        tx.commit();
+        sesion.close();
 
         return affectedRows;
     }

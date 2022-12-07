@@ -1,5 +1,6 @@
 package app;
 
+import utils.NewHibernateUtil;
 import java.util.HashMap;
 import java.util.List;
 import org.hibernate.Query;
@@ -47,7 +48,7 @@ public class QueryDept {
         try {
             dep = (Departments) q.uniqueResult();
         } catch (org.hibernate.NonUniqueResultException e) {
-            System.out.println("\t(-) More than 1 Result returned... Taking the 1st one");
+            System.out.println("\t(-) More than 1 Result returned. Taking the first one...\n");
             dep = (Departments) q.setMaxResults(1).uniqueResult();
         }
         sesion.close();

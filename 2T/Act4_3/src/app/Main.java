@@ -78,7 +78,6 @@ public class Main {
         }
     }
 
-    //podríamos utilizar el método searchDeptByName() para buscar el dept y luego pasarle al método de QueryDept un objeto Departments
     public static void getAverageSalaryByDeptName() {
         String deptName;
         double averageSalary = -0;
@@ -167,6 +166,16 @@ public class Main {
         System.out.printf("\t(+) %d Affected Rows\n\n", affectedRows);
     }
 
+    public static void deleteTeachersAllTeachersOfDept() {
+        int affectedRows;
+        String deptName;
+
+        System.out.print("DeptName: ");
+        deptName = eb.nextLine();
+        affectedRows = QueryTeach.deleteTeachersOfDepartment(deptName);
+        System.out.printf("\t(+) %d Affected Rows\n\n", affectedRows);
+    }
+
     public static void main(String[] args) {
         int option = 0;
 
@@ -198,6 +207,7 @@ public class Main {
                     riseSeniorsSalary();
                     break;
                 case 9:
+                    deleteTeachersAllTeachersOfDept();
                     break;
                 case 10:
                     break;
