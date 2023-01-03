@@ -3,12 +3,12 @@ package app;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 import pojos.Departments;
 import pojos.Teachers;
 import utils.Separator;
 
 /**
- *
  * @author Nando
  */
 public class Main {
@@ -56,7 +56,7 @@ public class Main {
     }
 
     public static void showAllDepartments() {
-        Departments[] listDep = null;
+        Departments[] listDep;
 
         listDep = QueryDept.getAllDepartments();
         for (Departments dep : listDep) {
@@ -65,7 +65,7 @@ public class Main {
     }
 
     public static void searchDeptByName() {
-        Departments dep = null;
+        Departments dep;
         String deptName;
 
         System.out.print("DeptName: ");
@@ -177,7 +177,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int option = 0;
+        int option;
 
         do {
             option = menu();
