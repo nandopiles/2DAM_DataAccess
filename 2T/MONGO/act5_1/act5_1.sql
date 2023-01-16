@@ -123,3 +123,16 @@ db.user.updateOne({name: 'Jorge', surname: 'López Sevilla'}, {$push: {comments:
         Name of the companies that are in Torrente and have zero followers.
         Name of the companies that are in Torrente and have more than 5 followers.
  */
+db.user.find({groups: 'historical novel', age: {$gte: 25}}, {_id: 1, name: 1, surname: 1, age: 1})
+
+db.user.find({'groups.1': {$exists: true}}, {name: 1, surname: 1, groups: 1, _id: 0})
+
+db.user.find({groups: {$all: ['historical novel', 'theater']}}, {name: 1, surname: 1, groups: 1, _id: 0})
+
+db.user.find({comments: {$exists: true}}, {name: 1, surname: 1})
+
+db.company.find({'address.town': 'Torrente', followers: 0}, {name: 1, _id: 0})
+
+db.company.find({'address.town': 'Torrente', followers: {$gte: 5}}, {name: 1, _id: 0})
+
+
