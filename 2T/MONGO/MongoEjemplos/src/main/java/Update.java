@@ -60,8 +60,29 @@ public class Update {
         System.out.println("==================================");
     }
 
+    public static void update3() {
+        Bson filterDoc = and(
+                regex("title", "Matrix"),
+                eq("year", 2003)
+        );
+        Bson updateDoc = and(
+                unset("awards"),
+                rename("plot", "shortplot")
+        );
+        movies.updateOne(filterDoc, updateDoc);
+        FindIterable<Document> findRes = movies.find(filterDoc).projection(projectDoc);
+
+        System.out.println("Update 3");
+        for (Document doc :
+                findRes) {
+            System.out.println(doc.toJson());
+        }
+        System.out.println("==================================");
+    }
+
     public static void main(String[] args) {
         update1();
         update2();
+        update3();
     }
 }

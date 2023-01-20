@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3612a322-76d2-425d-9523-9d075348caf6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Act4_1/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Act4_1/.idea/libraries/Act4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Act4_1/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Act4_1/.idea/libraries/mysql_connector_j_8_0_31.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Act4_1/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Act4_1/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Act4_1/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Act4_1/Act4_1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProvaHibernate/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Act4_1/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Act4_1/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Act4_1/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Act4_1/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Act4_3/nbproject/build-impl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Act4_3/nbproject/build-impl.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Act4_3/nbproject/genfiles.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Act4_3/nbproject/genfiles.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Act4_3/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Act4_3/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Act4_3/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Act4_3/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../MONGO/MongoEjemplos/src/main/java/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../MONGO/MongoEjemplos/src/main/java/Update.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="2KT6W4C0j7ADgaDf5CHxNUsBTs9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "F:/DAM_7J/DAM_DataAccess/2T/HQL/ExerciseQuerysHQL",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3612a322-76d2-425d-9523-9d075348caf6" name="Changes" comment="" />
+      <created>1673986253918</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1673986253918</updated>
+      <workItem from="1673986254971" duration="11000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
