@@ -3,6 +3,7 @@ import api.DataAPI;
 import com.mongodb.client.FindIterable;
 import pojos.Address;
 import pojos.Article;
+import pojos.Comment;
 import pojos.User;
 
 import java.util.Arrays;
@@ -129,6 +130,19 @@ public class Tests implements Colors {
                 "CountryTest"
         );
         DataAPI.updateAddress(user3, newAddress);
+//update the email
+        DataAPI.updateEmail(user3, "perdedor@gmail.com");
+//add a comment
+        Comment comment1 = new Comment(
+                1,
+                user1.getId(),
+                "Test Comment 1"
+        );
+        DataAPI.addComment(article1, comment1);
+//delete a user
+        DataAPI.deleteUser(user3);
+//delete an article
+        DataAPI.deleteArticle(article3);
 
         DataAPI.close();
     }

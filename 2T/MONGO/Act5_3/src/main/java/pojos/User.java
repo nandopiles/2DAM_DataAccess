@@ -1,17 +1,20 @@
 package pojos;
 
+import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
 
 /**
  * @author Nando
  */
 public class User {
-    private ObjectId id;
+    @BsonId
+    private final ObjectId id;
     private String name;
     private String email;
     private Address address;
 
     public User() {
+        this.id = new ObjectId();
     }
 
     public User(String name, String email, Address address) {

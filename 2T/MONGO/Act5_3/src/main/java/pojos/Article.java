@@ -1,5 +1,6 @@
 package pojos;
 
+import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
 
 import java.util.List;
@@ -8,7 +9,8 @@ import java.util.List;
  * @author Nando
  */
 public class Article {
-    private ObjectId id;
+    @BsonId
+    private final ObjectId id;
     private String name;
     private int price;
     private List<String> categories;

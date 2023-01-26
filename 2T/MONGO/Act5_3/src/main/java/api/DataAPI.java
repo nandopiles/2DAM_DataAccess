@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Sorts.ascending;
 import static com.mongodb.client.model.Sorts.descending;
+import static com.mongodb.client.model.Updates.push;
 import static com.mongodb.client.model.Updates.set;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
@@ -51,7 +52,7 @@ public class DataAPI implements Colors {
      */
     public static void close() {
         client.close();
-        System.out.printf("%s[+] Client has been closed %s\n", ANSI_LIGHT_BROWN, ANSI_RESET);
+        System.out.printf("%s\n[+] Client has been closed %s\n", ANSI_LIGHT_BROWN, ANSI_RESET);
     }
 
     /**
@@ -148,23 +149,48 @@ public class DataAPI implements Colors {
         users.updateOne(
                 eq("_id", user.getId()),
                 set("address", address));
-        System.out.println(ANSI_GREEN + "\n[+] Updated Address of user => " + user.getName() + ANSI_RESET);
-        System.out.println(ANSI_LIGHT_BROWN + "[*] Update => " + findUser(user.getId()) + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "\n[+] Updated Address of " + user.getName() + " => " + address + ANSI_RESET);
     }
 
-    public static void updateEmail(User us, String email) {
-
+    /**
+     * Updates the email of the user specified by parameter
+     */
+    public static void updateEmail(User user, String email) {
+        MongoCollection<User> users = db.getCollection("users", User.class);
+        users.updateOne(
+                eq("_id", user.getId()),
+                set("email", email));
+        System.out.println(ANSI_YELLOW + "\n[+] Updated Email of " + user.getName() + " => " + email + ANSI_RESET);
     }
 
-    public static void addComment(Article art, Comment newCom) {
-
+    /**
+     * Adds a comment to a specific article specified by parametre
+     */
+    public static void addComment(Article article, Comment newComment) {
+        MongoCollection<Article> articles = db.getCollection("articles", Article.class);
+        articles.updateOne(
+                eq("_id", article.getId()),
+                push("comments", newComment));
+        System.out.println(ANSI_GREEN + "\n[+] Comment added to the article => " + article.getName() + ANSI_RESET);
     }
 
-    public static void deleteArticle(Article art) {
+    /**
+     * Deletes the article specified by parameter
+     */
+    public static void deleteArticle(Article article) {
+        MongoCollection<Article> articles = db.getCollection("articles", Article.class);
 
+        articles.deleteOne(eq("_id", article.getId()));
+        System.out.println(ANSI_RED + "\n[+] Article deleted => " + article.getName() + ANSI_RESET);
     }
 
-    public static void deleteUser(User us) {
+    /**
+     * Deletes the user specified by parameter
+     */
+    public static void deleteUser(User user) {
+        MongoCollection<User> users = db.getCollection("users", User.class);
 
+        users.deleteOne(eq("_id", user.getId()));
+        System.out.println(ANSI_RED + "\n[+] User deleted => " + user.getName() + ANSI_RESET);
     }
 }
