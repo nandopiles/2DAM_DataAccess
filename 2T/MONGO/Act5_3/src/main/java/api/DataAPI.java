@@ -6,6 +6,8 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import exceptions.ScoreOutOfBoundException;
+import exceptions.UserIdNoutFoundException;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.types.ObjectId;
@@ -168,10 +170,20 @@ public class DataAPI implements Colors {
      */
     public static void addComment(Article article, Comment newComment) {
         MongoCollection<Article> articles = db.getCollection("articles", Article.class);
-        articles.updateOne(
-                eq("_id", article.getId()),
-                push("comments", newComment));
-        System.out.println(ANSI_GREEN + "\n[+] Comment added to the article => " + article.getName() + ANSI_RESET);
+
+        try {
+            if (newComment.getScore() < 1 || newComment.getScore() > 5) {
+                throw new ScoreOutOfBoundException(ANSI_RED + "\n[-] Score out of range (1-5)" + ANSI_RESET);
+            } else if (DataAPI.findUser(newComment.getUserId()) == null) {
+                throw new UserIdNoutFoundException(ANSI_RED + "\n[-] User ID not found" + ANSI_RESET);
+            }
+            articles.updateOne(
+                    eq("_id", article.getId()),
+                    push("comments", newComment));
+            System.out.println(ANSI_GREEN + "\n[+] Comment added to the article => " + article.getName() + ANSI_RESET);
+        } catch (ScoreOutOfBoundException | UserIdNoutFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     /**

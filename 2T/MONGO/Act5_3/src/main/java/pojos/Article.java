@@ -12,7 +12,7 @@ public class Article {
     @BsonId
     private final ObjectId id;
     private String name;
-    private int price;
+    private double price;
     private List<String> categories;
     private List<Comment> comments;
 
@@ -21,7 +21,7 @@ public class Article {
         this.comments = null;
     }
 
-    public Article(String name, int price, List<String> categories) {
+    public Article(String name, double price, List<String> categories) {
         this.id = new ObjectId();
         this.name = name;
         this.price = price;
@@ -41,11 +41,11 @@ public class Article {
         this.name = name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

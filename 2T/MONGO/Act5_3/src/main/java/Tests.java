@@ -1,6 +1,7 @@
 import alerts.Colors;
 import api.DataAPI;
 import com.mongodb.client.FindIterable;
+import org.bson.types.ObjectId;
 import pojos.Address;
 import pojos.Article;
 import pojos.Comment;
@@ -26,11 +27,11 @@ public class Tests implements Colors {
                 Arrays.asList("Sports", "Casual"));
         Article article2 = new Article(
                 "Test2",
-                3,
+                3.1,
                 Arrays.asList("Fashion", "Sports"));
         Article article3 = new Article(
                 "Test11",
-                24,
+                24.5,
                 List.of("News"));
 //insert Articles
         DataAPI.insertArticle(article1);
@@ -138,7 +139,25 @@ public class Tests implements Colors {
                 user1.getId(),
                 "Test Comment 1"
         );
+        Comment comment2 = new Comment(
+                7,
+                user1.getId(),
+                "Test Comment 2"
+        );
+        Comment comment3 = new Comment(
+                1,
+                user1.getId(),
+                "Test Comment 3"
+        );
+        Comment comment4 = new Comment(
+                1,
+                new ObjectId(),
+                "Test Comment 4"
+        );
         DataAPI.addComment(article1, comment1);
+        DataAPI.addComment(article1, comment2);
+        DataAPI.addComment(article1, comment3);
+        DataAPI.addComment(article1, comment4);
 //delete a user
         DataAPI.deleteUser(user3);
 //delete an article
