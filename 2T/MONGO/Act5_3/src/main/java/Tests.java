@@ -146,7 +146,7 @@ public class Tests implements Colors {
         );
         Comment comment3 = new Comment(
                 1,
-                user1.getId(),
+                user2.getId(),
                 "Test Comment 3"
         );
         Comment comment4 = new Comment(
@@ -158,8 +158,8 @@ public class Tests implements Colors {
         DataAPI.addComment(article1, comment2);
         DataAPI.addComment(article1, comment3);
         DataAPI.addComment(article1, comment4);
-//delete a user
-        DataAPI.deleteUser(user3);
+//delete a user and all its comments
+        DataAPI.deleteUser(user1);
 //delete an article
         DataAPI.deleteArticle(article3);
 

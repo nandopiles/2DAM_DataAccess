@@ -8,6 +8,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import exceptions.ScoreOutOfBoundException;
 import exceptions.UserIdNoutFoundException;
+import org.bson.BsonNull;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.types.ObjectId;
@@ -21,8 +22,7 @@ import java.util.regex.Pattern;
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Sorts.ascending;
 import static com.mongodb.client.model.Sorts.descending;
-import static com.mongodb.client.model.Updates.push;
-import static com.mongodb.client.model.Updates.set;
+import static com.mongodb.client.model.Updates.*;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -201,6 +201,13 @@ public class DataAPI implements Colors {
      */
     public static void deleteUser(User user) {
         MongoCollection<User> users = db.getCollection("users", User.class);
+        MongoCollection<Article> articles = db.getCollection("articles", Article.class);
+
+        articles.updateMany(
+                BsonNull.VALUE.asDocument(),
+                pull("comments", eq("userId", user.getId()))
+        );
+        System.out.println(ANSI_RED + "\n[+] All comments deleted of user => " + user.getName() + ANSI_RESET);
 
         users.deleteOne(eq("_id", user.getId()));
         System.out.println(ANSI_RED + "\n[+] User deleted => " + user.getName() + ANSI_RESET);
