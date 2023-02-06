@@ -9,6 +9,7 @@ import com.mongodb.client.MongoDatabase;
 import exceptions.ScoreOutOfBoundException;
 import exceptions.UserIdNoutFoundException;
 import org.bson.BsonNull;
+import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.types.ObjectId;
@@ -204,7 +205,7 @@ public class DataAPI implements Colors {
         MongoCollection<Article> articles = db.getCollection("articles", Article.class);
 
         articles.updateMany(
-                BsonNull.VALUE.asDocument(),
+                new Document(),
                 pull("comments", eq("userId", user.getId()))
         );
         System.out.println(ANSI_RED + "\n[+] All comments deleted of user => " + user.getName() + ANSI_RESET);
