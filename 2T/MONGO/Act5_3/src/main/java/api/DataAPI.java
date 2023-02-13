@@ -8,7 +8,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import exceptions.ScoreOutOfBoundException;
 import exceptions.UserIdNoutFoundException;
-import org.bson.BsonNull;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;

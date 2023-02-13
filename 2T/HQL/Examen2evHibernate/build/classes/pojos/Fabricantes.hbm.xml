@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13 feb. 2023 8:50:08 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Fabricantes" table="fabricantes" catalog="examen2hiber" optimistic-lock="version">
+        <id name="cif" type="string">
+            <column name="CIF" length="10" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="30" />
+        </property>
+        <property name="descrip" type="string">
+            <column name="descrip" length="50" />
+        </property>
+        <property name="domicilio" type="string">
+            <column name="domicilio" length="30" />
+        </property>
+        <set name="productoses" table="productos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cif_fabric" length="10" />
+            </key>
+            <one-to-many class="pojos.Productos" />
+        </set>
+    </class>
+</hibernate-mapping>

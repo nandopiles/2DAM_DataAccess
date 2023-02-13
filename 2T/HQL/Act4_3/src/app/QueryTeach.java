@@ -22,7 +22,7 @@ public class QueryTeach {
     public static void showTeacher(Teachers teacher) {
         Session sesion = sesionf.openSession();
 
-        sesion.update(teacher);
+        sesion.refresh(teacher);
         System.out.println(teacher.toString());
         sesion.close();
     }
